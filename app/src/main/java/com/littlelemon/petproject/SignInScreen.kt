@@ -1,18 +1,20 @@
+package com.littlelemon.petproject.ui.screens
+
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SignInScreen(onSignIn: (String, String) -> Unit, onNavigateToSignUp: () -> Unit) {
+fun SignInScreen(
+    onSignIn: (String, String) -> Unit,
+    onNavigateToSignUp: () -> Unit
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -20,41 +22,54 @@ fun SignInScreen(onSignIn: (String, String) -> Unit, onNavigateToSignUp: () -> U
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .background(Color.Gray)
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         TextField(
             value = email,
             onValueChange = { email = it },
-            placeholder = { Text("Email") }
+            label = { Text("Login") },
+            modifier = Modifier.fillMaxWidth()
         )
-
-        Spacer(modifier = Modifier.height(8.dp))
 
         TextField(
             value = password,
             onValueChange = { password = it },
-            placeholder = { Text("Password") },
+            label = { Text("Password") },
+            modifier = Modifier.fillMaxWidth(),
             visualTransformation = PasswordVisualTransformation()
         )
 
-        Spacer(modifier = Modifier
-            .height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Button(onClick = { onSignIn(email, password) }) {
+        TextButton(onClick = { /* Forgot Password logic */ }) {
+            Text("Forgot Password")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = { onSignIn(email, password) }, modifier = Modifier.fillMaxWidth()) {
             Text("Sign In")
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
+        Button(onClick = { /* Sign in with logic */ }, modifier = Modifier.fillMaxWidth()) {
+            Text("Sign in with")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         TextButton(onClick = onNavigateToSignUp) {
             Text("Sign Up")
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SignInScreenPreview() {
-    SignInScreen(onSignIn = { _, _ -> }, onNavigateToSignUp = {})
 }
