@@ -71,16 +71,19 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation ("androidx.compose.ui:ui:1.0.1")
-    implementation ("androidx.compose.material:material:1.0.1")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
+    implementation (libs.ui)
+    implementation (libs.androidx.material)
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation (libs.androidx.navigation.compose.v240alpha10)
+
 
 //    firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
-    implementation("com.google.firebase:firebase-analytics:22.0.2")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 
 //    Room
-    implementation ("androidx.room:room-runtime:2.2.6")
+    implementation (libs.androidx.room.runtime)
 //    kapt ("androidx.room:room-compiler:2.2.6")
-    implementation ("androidx.room:room-ktx:2.2.6")
+    implementation (libs.androidx.room.ktx)
 }

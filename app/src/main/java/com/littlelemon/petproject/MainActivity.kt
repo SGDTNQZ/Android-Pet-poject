@@ -3,31 +3,45 @@ package com.littlelemon.petproject
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.littlelemon.petproject.ui.Theme
-import com.littlelemon.petproject.ui.AppNavHost
-import com.littlelemon.petproject.AuthViewModel
+import com.littlelemon.petproject.screens.SignInScreen
+import com.littlelemon.petproject.screens.SignUpScreen
+import com.littlelemon.petproject.viewModels.UserViewModel
 
 class MainActivity : ComponentActivity() {
-    private val auth = Firebase.auth
-    private val authViewModel: AuthViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyAppTheme {
-                MyApp(authViewModel)
-            }
+            MyApp()
         }
     }
+}
 
-    @Composable
-    fun MyApp(authViewModel: AuthViewModel) {
-        val navController = rememberNavController()
-        AppNavHost(navController = navController, authViewModel = authViewModel)
+@Composable
+fun MyApp() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "signIn") {
+        composable("signIn") { SignInScreen(navController) }
+        composable("signUp") { SignUpScreen() }
     }
+}
+
+@Composable
+fun SignInScreen(navController: NavHostController) {
+    val viewModel: UserViewModel = viewModel()
+    SignInScreen(viewModel) {
+        navController.navigate("signUp")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    MyApp()
 }
