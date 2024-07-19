@@ -65,27 +65,26 @@ class UserViewModel: ViewModel() {
         _height.value = newHeight
     }
 
-    fun signUp() {
-        if (_password.value != _confirmPassword.value) {
-            _signUpStatus.value = "Passwords do not match"
-            return
-        }
-
-        viewModelScope.launch {
-            auth.createUserWithEmailAndPassword(_email.value, _password.value)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        _signUpStatus.value = "Sign-up successful"
-                    } else {
-                        _signUpStatus.value = "Sign-up failed: ${task.exception?.message}"
+    fun signUp(email: String, password: String) {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            viewModelScope.launch {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            _signInStatus.value = "Sign-up successful!"
+                        } else {
+                            _signInStatus.value = "Sign-up failed: ${task.exception?.message}"
+                        }
                     }
-                }
+            }
+        } else {
+            _signInStatus.value = "Email and password must not be empty"
         }
     }
 
-    fun signIn() {
+    fun signIn(email: String, password: String) {
         viewModelScope.launch {
-            auth.signInWithEmailAndPassword(_email.value, _password.value)
+            auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         _signInStatus.value = "Sign-in successful"

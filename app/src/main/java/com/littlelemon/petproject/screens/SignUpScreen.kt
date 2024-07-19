@@ -23,11 +23,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.littlelemon.petproject.Screen
 import com.littlelemon.petproject.viewModels.UserViewModel
 
 
 @Composable
-fun SignUpScreen(viewModel: UserViewModel = viewModel()){
+fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavController){
 
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
@@ -158,7 +161,10 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel()){
 
 
             Spacer(modifier = Modifier.height(10.dp))
-            Button(onClick = { viewModel.signUp() },
+            Button(onClick = {
+                viewModel.signUp(email, password)
+                navController.navigate(Screen.Feed.route)
+            },
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.CenterHorizontally),) {
@@ -176,5 +182,5 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel()){
 @Preview(showBackground = true)
 @Composable
 fun SignUpScreenPreview(){
-    SignUpScreen()
+    SignUpScreen(navController = rememberNavController())
 }

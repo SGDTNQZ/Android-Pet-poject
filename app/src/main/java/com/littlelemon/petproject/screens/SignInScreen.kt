@@ -28,10 +28,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.littlelemon.petproject.viewModels.UserViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.littlelemon.petproject.Screen
 
 
 @Composable
-fun SignInScreen(viewModel: UserViewModel = viewModel(), onSignUpClick: () -> Unit) {
+fun SignInScreen(viewModel: UserViewModel = viewModel(), navController: NavHostController) {
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
     val signInStatus by viewModel.signInStatus.collectAsState()
@@ -103,7 +106,10 @@ fun SignInScreen(viewModel: UserViewModel = viewModel(), onSignUpClick: () -> Un
 
             Spacer(modifier = Modifier.height(10.dp))
             Button(
-                onClick = { viewModel.signIn()},
+                onClick = {
+                    viewModel.signIn(email, password)
+                    navController.navigate(Screen.Feed.route)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
@@ -112,7 +118,7 @@ fun SignInScreen(viewModel: UserViewModel = viewModel(), onSignUpClick: () -> Un
 
             Spacer(modifier = Modifier.height(10.dp))
             Button(
-                onClick = {onSignUpClick()  },
+                onClick = { navController.navigate(Screen.SignUp.route) },
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
@@ -136,5 +142,5 @@ fun SignInScreen(viewModel: UserViewModel = viewModel(), onSignUpClick: () -> Un
 @Preview(showBackground = true)
 @Composable
 fun SignInScreenPreview() {
-    SignInScreen(onSignUpClick = {})
+    SignInScreen(navController = rememberNavController())
 }

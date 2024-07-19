@@ -25,9 +25,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun feedScreen(){
+fun FeedScreen(navController: NavController){
     Column(modifier = Modifier
         .fillMaxSize()
         .background(color = Color.Black)) {
@@ -88,6 +90,6 @@ fun feedScreen(){
 
 @Preview(showBackground = true)
 @Composable
-fun feedScreenPreview(){
-    feedScreen()
+fun FeedScreenPreview(){
+    FeedScreen(navController = rememberNavController())
 }
