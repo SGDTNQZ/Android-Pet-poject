@@ -17,8 +17,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,19 +24,21 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.littlelemon.petproject.viewModels.UserViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.littlelemon.petproject.Screen
+import com.littlelemon.petproject.navigation.Screen
 
 
 @Composable
-fun SignInScreen(viewModel: UserViewModel = viewModel(), navController: NavHostController) {
-    val email by viewModel.email.collectAsState()
-    val password by viewModel.password.collectAsState()
-    val signInStatus by viewModel.signInStatus.collectAsState()
+//fun SignInScreen(viewModel: UserViewModel = viewModel(), navController: NavHostController) {
+fun SignInScreen( navController: NavHostController) {
+//    val email by viewModel.email.collectAsState()
+//    val password by viewModel.password.collectAsState()
+//    val signInStatus by viewModel.signInStatus.collectAsState()
 
+    val email: String = ""
+    val password: String = ""
+    val signInStatus: String = ""
 
     Column (
         modifier = Modifier
@@ -74,7 +74,7 @@ fun SignInScreen(viewModel: UserViewModel = viewModel(), navController: NavHostC
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
                 value = email,
-                onValueChange = viewModel::onEmailChange,
+                onValueChange = {},
                 modifier = Modifier
                     .background(color = Color.White)
                     .fillMaxWidth(),
@@ -94,7 +94,7 @@ fun SignInScreen(viewModel: UserViewModel = viewModel(), navController: NavHostC
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
                 value = password,
-                onValueChange = viewModel::onPasswordChange,
+                onValueChange = {},
                 modifier = Modifier
                     .background(color = Color.White)
                     .fillMaxWidth(),
@@ -107,7 +107,7 @@ fun SignInScreen(viewModel: UserViewModel = viewModel(), navController: NavHostC
             Spacer(modifier = Modifier.height(10.dp))
             Button(
                 onClick = {
-                    viewModel.signIn(email, password)
+//                    viewModel.signIn(email, password)
                     navController.navigate(Screen.Feed.route)
                 },
                 modifier = Modifier

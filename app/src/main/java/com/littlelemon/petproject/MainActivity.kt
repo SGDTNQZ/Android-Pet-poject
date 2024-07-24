@@ -9,12 +9,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.FirebaseApp
+import com.littlelemon.petproject.navigation.AppNavigation
+import com.littlelemon.petproject.navigation.Screen
 import com.littlelemon.petproject.screens.FeedScreen
 import com.littlelemon.petproject.screens.SignInScreen
 import com.littlelemon.petproject.screens.SignUpScreen
+import com.littlelemon.petproject.screens.WorkoutScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        FirebaseApp.initializeApp(this)
         super.onCreate(savedInstanceState)
         setContent {
             AppNavigation()
@@ -22,15 +27,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun AppNavigation() {
-    val navController: NavHostController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.SignIn.route) {
-        composable(Screen.SignIn.route) { SignInScreen(navController = navController) }
-        composable(Screen.SignUp.route) { SignUpScreen(navController = navController) }
-        composable(Screen.Feed.route) { FeedScreen(navController = navController) }
-    }
-}
+
 
 @Preview(showBackground = true)
 @Composable

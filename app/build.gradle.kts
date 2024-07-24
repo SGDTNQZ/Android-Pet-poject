@@ -75,14 +75,18 @@ dependencies {
     implementation (libs.androidx.material)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
 
+    //Navigation
     implementation (libs.androidx.navigation.compose.v240alpha10)
 
 
-//    firebase
+    //Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation (libs.firebase.auth)
+    implementation (libs.firebase.database)
 
-//    Room
+
+    //Room
     implementation (libs.androidx.room.runtime)
 //    kapt ("androidx.room:room-compiler:2.2.6")
     implementation (libs.androidx.room.ktx)

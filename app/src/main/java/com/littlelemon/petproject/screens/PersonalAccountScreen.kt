@@ -16,7 +16,7 @@ import com.littlelemon.petproject.appBars.MyAppBottomBar
 import com.littlelemon.petproject.appBars.MyAppTopBar
 
 @Composable
-fun FeedScreen(navController: NavController){
+fun PersonalAccountScreen(navController: NavController){
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -32,7 +32,7 @@ fun FeedScreen(navController: NavController){
         ) {
             // Add content here
 
-            Text(color = Color.White, text = "Feed")
+            Text(color = Color.White, text = "Personal Account")
         }
 
         MyAppBottomBar(navController)
@@ -42,6 +42,6 @@ fun FeedScreen(navController: NavController){
 
 @Preview(showBackground = true)
 @Composable
-fun FeedScreenPreview(){
-    FeedScreen(navController = rememberNavController())
+fun PersonalAccountScreenPreview(){
+    PersonalAccountScreen(navController = rememberNavController())
 }

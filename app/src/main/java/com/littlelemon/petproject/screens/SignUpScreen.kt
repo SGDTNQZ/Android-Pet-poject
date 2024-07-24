@@ -13,8 +13,6 @@ import androidx.compose.material.Text
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,24 +20,32 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.littlelemon.petproject.Screen
-import com.littlelemon.petproject.viewModels.UserViewModel
+import com.littlelemon.petproject.navigation.Screen
 
 
 @Composable
-fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavController){
+//fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavController){
+fun SignUpScreen( navController: NavController){
 
-    val email by viewModel.email.collectAsState()
-    val password by viewModel.password.collectAsState()
-    val confirmPassword by viewModel.confirmPassword.collectAsState()
-    val name by viewModel.name.collectAsState()
-    val age by viewModel.age.collectAsState()
-    val weight by viewModel.weight.collectAsState()
-    val height by viewModel.height.collectAsState()
-    val signUpStatus by viewModel.signUpStatus.collectAsState()
+//    val email by viewModel.email.collectAsState()
+//    val password by viewModel.password.collectAsState()
+//    val confirmPassword by viewModel.confirmPassword.collectAsState()
+//    val name by viewModel.name.collectAsState()
+//    val age by viewModel.age.collectAsState()
+//    val weight by viewModel.weight.collectAsState()
+//    val height by viewModel.height.collectAsState()
+//    val signUpStatus by viewModel.signUpStatus.collectAsState()
+
+    val email : String = ""
+    val password : String = ""
+    val confirmPassword : String = ""
+    val name : String = ""
+    val age : String = ""
+    val weight : String = ""
+    val height : String = ""
+    val signUpStatus : String = ""
 
     Column (
         modifier = Modifier
@@ -62,7 +68,7 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavContr
             )
             Spacer(modifier = Modifier.height(10.dp))
             TextField(value = email,
-                onValueChange = viewModel::onEmailChange,
+                onValueChange = {  },
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White),
@@ -78,7 +84,7 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavContr
             )
             Spacer(modifier = Modifier.height(10.dp))
             TextField(value = name,
-                onValueChange = viewModel::onNameChange,
+                onValueChange = {  },
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White),
@@ -93,7 +99,7 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavContr
             )
             Spacer(modifier = Modifier.height(10.dp))
             TextField(value = age,
-                onValueChange = viewModel::onAgeChange,
+                onValueChange = {},
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White),
@@ -108,7 +114,7 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavContr
             )
             Spacer(modifier = Modifier.height(10.dp))
             TextField(value = weight,
-                onValueChange = viewModel::onWeightChange,
+                onValueChange = {},
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White),
@@ -123,7 +129,7 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavContr
             )
             Spacer(modifier = Modifier.height(10.dp))
             TextField(value = height,
-                onValueChange = viewModel::onHeightChange,
+                onValueChange = {},
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White),
@@ -138,7 +144,7 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavContr
             )
             Spacer(modifier = Modifier.height(10.dp))
             TextField(value = password,
-                onValueChange = viewModel::onPasswordChange,
+                onValueChange = {},
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White),
@@ -153,7 +159,7 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavContr
             )
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(value = confirmPassword,
-                onValueChange = viewModel::onConfirmPasswordChange,
+                onValueChange = {},
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.White),
@@ -162,7 +168,7 @@ fun SignUpScreen(viewModel: UserViewModel = viewModel(), navController: NavContr
 
             Spacer(modifier = Modifier.height(10.dp))
             Button(onClick = {
-                viewModel.signUp(email, password)
+//                viewModel.signUp(email, password)
                 navController.navigate(Screen.Feed.route)
             },
                 modifier = Modifier

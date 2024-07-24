@@ -14,9 +14,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.littlelemon.petproject.appBars.MyAppBottomBar
 import com.littlelemon.petproject.appBars.MyAppTopBar
+import com.littlelemon.petproject.navigation.Screen
 
 @Composable
-fun FeedScreen(navController: NavController){
+fun WorkoutArchiveScreen(navController: NavController){
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -32,16 +33,15 @@ fun FeedScreen(navController: NavController){
         ) {
             // Add content here
 
-            Text(color = Color.White, text = "Feed")
+            Text(color = Color.White, text = "Workout Archive")
         }
 
         MyAppBottomBar(navController)
     }
-
 }
 
 @Preview(showBackground = true)
 @Composable
-fun FeedScreenPreview(){
-    FeedScreen(navController = rememberNavController())
+fun WorkoutArchiveScreenPreview(){
+    WorkoutArchiveScreen(navController = rememberNavController())
 }
