@@ -20,8 +20,7 @@ import com.littlelemon.petproject.navigation.Screen
 fun WorkoutArchiveScreen(navController: NavController){
 
     Column(modifier = Modifier
-        .fillMaxSize()
-        .background(color = Color.Black)) {
+        .fillMaxSize(),) {
 
         MyAppTopBar(navController)
 
@@ -33,7 +32,7 @@ fun WorkoutArchiveScreen(navController: NavController){
         ) {
             // Add content here
 
-            Text(color = Color.White, text = "Workout Archive")
+            Text( text = "Workout Archive")
         }
 
         MyAppBottomBar(navController)

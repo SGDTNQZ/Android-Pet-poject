@@ -19,8 +19,7 @@ import com.littlelemon.petproject.appBars.MyAppTopBar
 fun PersonalAccountScreen(navController: NavController){
 
     Column(modifier = Modifier
-        .fillMaxSize()
-        .background(color = Color.Black)) {
+        .fillMaxSize(),) {
 
         MyAppTopBar(navController)
 
@@ -32,7 +31,7 @@ fun PersonalAccountScreen(navController: NavController){
         ) {
             // Add content here
 
-            Text(color = Color.White, text = "Personal Account")
+            Text( text = "Personal Account")
         }
 
         MyAppBottomBar(navController)

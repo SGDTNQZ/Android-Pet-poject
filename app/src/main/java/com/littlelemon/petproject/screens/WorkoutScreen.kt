@@ -33,8 +33,7 @@ import com.littlelemon.petproject.appBars.MyAppTopBar
 @Composable
 fun WorkoutScreen(navController: NavController){
     Column(modifier = Modifier
-        .fillMaxSize()
-        .background(color = Color.Black)) {
+        .fillMaxSize(),) {
 
         MyAppTopBar(navController)
 
@@ -45,7 +44,7 @@ fun WorkoutScreen(navController: NavController){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Add content here
-            Text(color = Color.White, text = "Workout")
+            Text( text = "Workout")
         }
 
         MyAppBottomBar(navController)
