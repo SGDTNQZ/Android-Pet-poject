@@ -9,7 +9,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -58,6 +62,9 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
     Column (
         modifier = Modifier
     ) {
+        IconButton(onClick = { navController.navigate("sign_in")}) {
+            Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+        }
         Column (
             modifier = Modifier
                 .fillMaxSize()
@@ -119,10 +126,4 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
 
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SignUpScreenPreview(){
-    SignUpScreen(navController = rememberNavController(), userViewModel = UserViewModel())
 }
