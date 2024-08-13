@@ -8,7 +8,7 @@ import java.util.Date
 data class ExerciseEntity (
 
     @PrimaryKey(autoGenerate = true)
-    var id : Int = 0,
+    var exerciseID : Int = 0,
     var exerciseName : String,
     var weight : Float,
     var reps : Int,

@@ -7,9 +7,10 @@ import androidx.room.PrimaryKey
 @Entity
 data class UserEntity (
     @PrimaryKey(autoGenerate = true)
-    var id : Int = 0,
+    var userId : Int = 0,
     var userEmail : String,
     var userName : String,
+    var userPassword : String,
     var userWeight : Float,
     var userHeight : Float,
     var userCreatedAt : Data
