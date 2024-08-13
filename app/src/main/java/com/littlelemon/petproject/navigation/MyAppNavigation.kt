@@ -1,7 +1,6 @@
 package com.littlelemon.petproject.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,7 +15,7 @@ import com.littlelemon.petproject.screens.WorkoutScreen
 import com.littlelemon.petproject.viewModels.UserViewModel
 
 @Composable
-fun AppNavigation(userViewModel: UserViewModel) {
+fun AppNavigation() {
     val navController: NavHostController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.SignIn.route) {
         composable(Screen.SignIn.route) { SignInScreen(navController = navController, userViewModel = UserViewModel()) }

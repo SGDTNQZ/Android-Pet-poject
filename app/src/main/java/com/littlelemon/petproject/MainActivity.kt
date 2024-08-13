@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val userViewModel: UserViewModel by viewModels()
         setContent {
-            AppNavigation(userViewModel)
+            AppNavigation()
         }
     }
 }
