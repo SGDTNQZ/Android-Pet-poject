@@ -33,7 +33,7 @@ fun MyAppTopBar(navController: NavController ){
             contentDescription = "Settings Icon",
             modifier = Modifier
                 .weight(0.1F)
-                .clickable { /* Handle click */ }
+                .clickable { navController.navigate("settings") }
                 .align(Alignment.CenterVertically),
         )
     }

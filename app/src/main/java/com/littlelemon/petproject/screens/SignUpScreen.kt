@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.littlelemon.petproject.navigation.Screen
 import com.littlelemon.petproject.viewModels.AuthState
 import com.littlelemon.petproject.viewModels.UserViewModel
 
@@ -74,7 +72,7 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
                     .align(Alignment.Start)
             )
             Spacer(modifier = Modifier.height(10.dp))
-            OutlinedTextField(value = email,
+            TextField(value = email,
                 onValueChange = { email = it },
                 modifier = Modifier
                     .fillMaxWidth(),
