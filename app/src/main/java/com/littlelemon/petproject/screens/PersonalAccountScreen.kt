@@ -38,9 +38,3 @@ fun PersonalAccountScreen(navController: NavController){
     }
 
 }
-
-@Preview(showBackground = true)
-@Composable
-fun PersonalAccountScreenPreview(){
-    PersonalAccountScreen(navController = rememberNavController())
-}

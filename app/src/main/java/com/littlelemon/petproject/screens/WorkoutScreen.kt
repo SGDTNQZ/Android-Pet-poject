@@ -3,9 +3,12 @@ package com.littlelemon.petproject.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -40,8 +43,8 @@ fun WorkoutScreen(navController: NavController){
 
         Column(
             modifier = Modifier
-            .fillMaxSize()
-            .weight(1F),
+                .fillMaxSize()
+                .weight(1F),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -50,17 +53,21 @@ fun WorkoutScreen(navController: NavController){
         }
 
         Row (
-            modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight(),
+//            modifier = Modifier
+////                .fillMaxWidth()
+////                .wrapContentHeight(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ){
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { /*TODO*/ },
+                modifier = Modifier.padding(40.dp)
+
+                ) {
                 Icon(
                     Icons.Default.AddCircle,
                     contentDescription = "Add",
-                    modifier = Modifier.size(100.dp)
+//                    modifier = Modifier.padding(40.dp)
+
                 )
             }
         }
@@ -73,14 +80,15 @@ fun WorkoutScreen(navController: NavController){
 fun WorkoutHeader(){
     Row (
         modifier = Modifier
-        .fillMaxWidth()
-        .padding(16.dp),
+            .fillMaxWidth()
+            .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
             text = "Exercise name",
             fontSize = 20.sp,
         )
+
         Text(
             text = "Weight",
             fontSize = 20.sp,
@@ -101,11 +109,11 @@ fun WorkoutHeader(){
 fun WorkoutItem(){
     Row (
         modifier = Modifier
-        .fillMaxWidth()
-        .padding(8.dp)
-        .clip(RoundedCornerShape(16.dp))
-        .background(MaterialTheme.colorScheme.primary)
-        .padding(16.dp),
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.primary)
+            .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ){
         Column ( modifier = Modifier.weight(1f)) {
@@ -123,6 +131,7 @@ fun WorkoutItem(){
                     fontSize = 20.sp,
                     color = Color.White
                 )
+                VerticalDivider(Modifier.height(IntrinsicSize.Max))
                 Text(
                     text = "Weight",
                     fontSize = 20.sp,

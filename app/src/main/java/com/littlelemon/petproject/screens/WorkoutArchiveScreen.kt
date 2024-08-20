@@ -38,9 +38,3 @@ fun WorkoutArchiveScreen(navController: NavController){
         MyAppBottomBar(navController)
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun WorkoutArchiveScreenPreview(){
-    WorkoutArchiveScreen(navController = rememberNavController())
-}
