@@ -50,7 +50,6 @@ fun WorkoutScreen(navController: NavController){
             modifier = Modifier
                 .fillMaxSize()
                 .weight(1F),
-//            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Add content here
