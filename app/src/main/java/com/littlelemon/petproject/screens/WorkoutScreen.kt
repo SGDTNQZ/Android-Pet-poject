@@ -13,13 +13,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
@@ -47,7 +50,7 @@ fun WorkoutScreen(navController: NavController){
             modifier = Modifier
                 .fillMaxSize()
                 .weight(1F),
-            verticalArrangement = Arrangement.Center,
+//            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Add content here
@@ -61,13 +64,18 @@ fun WorkoutScreen(navController: NavController){
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ){
-            IconButton(onClick = { /*TODO*/ },
-                ) {
+            FloatingActionButton(
+                onClick = { /*TODO*/ },
+                shape = CircleShape,
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                contentColor = Color.White,
+                modifier = Modifier
+                    .padding(16.dp)) {
                 Icon(
                     Icons.Default.AddCircle,
-                    contentDescription = "Add",
-                    modifier = Modifier.fillMaxSize()
-                )
+                    contentDescription = "Add button",
+                    modifier = Modifier
+                        .size(56.dp))
             }
         }
         MyAppBottomBar(navController)
@@ -80,6 +88,7 @@ fun WorkoutHeader(){
     Row (
         modifier = Modifier
             .fillMaxWidth()
+            .height(IntrinsicSize.Min)
             .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
@@ -87,14 +96,31 @@ fun WorkoutHeader(){
             text = "Exercise name",
             fontSize = 20.sp,
         )
-
+        Divider(
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(1.dp),
+        )
         Text(
             text = "Weight",
             fontSize = 20.sp,
         )
+        Divider(
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(1.dp),
+        )
         Text(
             text = "Reps",
             fontSize = 20.sp,
+        )
+        Divider(
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(1.dp),
         )
         Text(
             text = "Set",
