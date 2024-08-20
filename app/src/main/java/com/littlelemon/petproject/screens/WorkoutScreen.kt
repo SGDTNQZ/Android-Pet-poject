@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -53,21 +55,18 @@ fun WorkoutScreen(navController: NavController){
         }
 
         Row (
-//            modifier = Modifier
-////                .fillMaxWidth()
-////                .wrapContentHeight(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ){
             IconButton(onClick = { /*TODO*/ },
-                modifier = Modifier.padding(40.dp)
-
                 ) {
                 Icon(
                     Icons.Default.AddCircle,
                     contentDescription = "Add",
-//                    modifier = Modifier.padding(40.dp)
-
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }
@@ -123,7 +122,9 @@ fun WorkoutItem(){
                 color = Color.LightGray
             )
             Row (
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .height(IntrinsicSize.Min)
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ){
                 Text(
@@ -131,16 +132,33 @@ fun WorkoutItem(){
                     fontSize = 20.sp,
                     color = Color.White
                 )
-                VerticalDivider(Modifier.height(IntrinsicSize.Max))
+                Divider(
+                    color = Color.White,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(1.dp),
+                    )
                 Text(
                     text = "Weight",
                     fontSize = 20.sp,
                     color = Color.White
                 )
+                Divider(
+                    color = Color.White,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(1.dp),
+                )
                 Text(
                     text = "Reps",
                     fontSize = 20.sp,
                     color = Color.White
+                )
+                Divider(
+                    color = Color.White,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(1.dp),
                 )
                 Text(
                     text = "Set",
