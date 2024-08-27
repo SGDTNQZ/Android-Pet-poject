@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -19,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -38,6 +41,15 @@ import com.littlelemon.petproject.viewModels.UserViewModel
 @Composable
 fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
 
+    var name by  remember {
+        mutableStateOf("")
+    }
+    var weight by remember {
+        mutableFloatStateOf(0f)
+    }
+    var height by remember {
+        mutableFloatStateOf(0f)
+    }
     var email by  remember {
         mutableStateOf("")
     }
@@ -68,11 +80,57 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .padding(50.dp),
+                .padding(50.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
 
         ) {
+//            Name field
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = "Name",
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .align(Alignment.Start)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(value = name,
+                onValueChange = { name = it },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                placeholder = { Text(text = "John Doe", fontSize = 15.sp)}
+            )
+
+//            Weight field
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = "Weight in kg",
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .align(Alignment.Start)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(value = weight.toString(),
+                onValueChange = { weight = it.toFloatOrNull() ?: 0f },
+                modifier = Modifier
+                    .fillMaxWidth(),
+            )
+
+//            Height field
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = "Height in cm",
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .align(Alignment.Start)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            TextField(value = height.toString(),
+                onValueChange = { height = it.toFloatOrNull() ?: 0f },
+                modifier = Modifier
+                    .fillMaxWidth(),
+            )
+
+//            Email field
+            Spacer(modifier = Modifier.height(10.dp))
             Text(text = "Email",
                 fontSize = 20.sp,
                 modifier = Modifier
@@ -86,7 +144,7 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
                 placeholder = { Text(text = "example@email.com", fontSize = 15.sp)}
             )
 
-
+//            Password field
             Spacer(modifier = Modifier.height(20.dp))
             Text(text = "Password",
                 fontSize = 20.sp,
