@@ -14,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -28,6 +29,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.littlelemon.petproject.appBars.MyAppBottomBar
 import com.littlelemon.petproject.appBars.MyAppTopBar
+import com.littlelemon.petproject.viewModels.AuthState
 import com.littlelemon.petproject.viewModels.UserViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -35,6 +37,15 @@ import kotlin.math.pow
 
 @Composable
 fun PersonalAccountScreen(navController: NavController, userViewModel: UserViewModel){
+
+    val authState = userViewModel.authState.observeAsState()
+
+    LaunchedEffect(authState.value) {
+        when(authState.value){
+            is AuthState.Unauthenticated-> navController.navigate("sign_in")
+            else -> Unit
+        }
+    }
 
     val userList by userViewModel.userList.observeAsState(emptyList())
 
@@ -176,21 +187,21 @@ fun PersonalAccountScreen(navController: NavController, userViewModel: UserViewM
                 )
             }
             Spacer(modifier = Modifier.size(10.dp))
-            Spacer(modifier = Modifier.size(10.dp))
+
+
             Button(
                 onClick = {
                     if (user != null){
                         userViewModel.deleteUser(user.id)
-                        // Optionally, navigate the user to another screen or show a confirmation message
-                        navController.navigate("signIn") {
-                            // Clear the back stack to prevent navigating back to the deleted account screen
-                            popUpTo(navController.graph.startDestinationId) { inclusive = true }
-                        } // Navigate back or to a different screen
+                        userViewModel.signOut()
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(text = "Delete Account", fontSize = 20.sp, color = Color.Red)
+                Text(
+                    text = "Delete Account",
+                    fontSize = 20.sp,
+                    )
             }
 
         }

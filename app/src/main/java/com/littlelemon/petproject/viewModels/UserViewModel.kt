@@ -50,9 +50,6 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    fun getUserByFirebaseId(firebaseUserId: String): LiveData<UserEntity?> {
-        return userDao.getUserByFirebaseId(firebaseUserId)
-    }
     fun deleteUserAccount(userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             // Delete user from local database
@@ -62,9 +59,6 @@ class UserViewModel : ViewModel() {
             val firebaseUser = FirebaseAuth.getInstance().currentUser
             firebaseUser?.delete()?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Successfully deleted Firebase user
-                    // Optionally, you can update the UI or notify the user
-                    // For example, you might want to update the auth state
                     _authState.postValue(AuthState.Unauthenticated)
                 } else {
                     // Handle Firebase deletion error

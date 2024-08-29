@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 import com.littlelemon.petproject.entities.UserEntity
 
 
-@Database(entities = [UserEntity::class], version = 1)
+@Database(entities = [UserEntity::class], version = 2)
 @TypeConverters(Converters::class)
 abstract class UserDatabase : RoomDatabase(){
     companion object {
