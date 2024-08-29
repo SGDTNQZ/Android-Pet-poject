@@ -2,7 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
-//    kotlin("kapt") version "2.0.0"
+
+//    kapt
+    id("org.jetbrains.kotlin.kapt")
 
 }
 
@@ -89,7 +91,9 @@ dependencies {
 
 
     //Room
+    val room_version = "2.6.1"
+
     implementation (libs.androidx.room.runtime)
-//    kapt ("androidx.room:room-compiler:2.2.6")
+    kapt ("androidx.room:room-compiler:$room_version")
     implementation (libs.androidx.room.ktx)
 }

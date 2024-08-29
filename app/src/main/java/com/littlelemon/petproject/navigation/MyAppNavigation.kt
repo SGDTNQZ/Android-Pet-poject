@@ -22,7 +22,7 @@ fun AppNavigation() {
         composable(Screen.SignUp.route) { SignUpScreen(navController = navController, userViewModel = UserViewModel()) }
         composable(Screen.Feed.route) { FeedScreen(navController = navController,userViewModel = UserViewModel()) }
         composable(Screen.WorkOut.route) { WorkoutScreen(navController = navController) }
-        composable(Screen.PersonalPage.route) { PersonalAccountScreen(navController = navController) }
+        composable(Screen.PersonalPage.route) { PersonalAccountScreen(navController = navController, userViewModel = UserViewModel()) }
         composable(Screen.Archive.route) { WorkoutArchiveScreen(navController = navController) }
         composable(Screen.Settings.route){ SettingScreen(navController = navController, userViewModel = UserViewModel())}
     }
