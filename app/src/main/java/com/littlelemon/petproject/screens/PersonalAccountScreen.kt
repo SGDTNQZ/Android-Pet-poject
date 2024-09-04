@@ -1,7 +1,5 @@
 package com.littlelemon.petproject.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,14 +17,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.littlelemon.petproject.appBars.MyAppBottomBar
 import com.littlelemon.petproject.appBars.MyAppTopBar
 import com.littlelemon.petproject.viewModels.AuthState
@@ -165,10 +159,12 @@ fun PersonalAccountScreen(navController: NavController, userViewModel: UserViewM
                 )
                 Spacer(modifier = Modifier.size(5.dp))
                 Text(
-                    text = "${user?.weight ?: "N/A"} cm",
+                    text = "${user?.height ?: "N/A"} cm",
                     fontSize = 16.sp
                 )
             }
+            Spacer(modifier = Modifier.size(10.dp))
+
             // BMI field
             Row(
                 modifier = Modifier
@@ -192,8 +188,8 @@ fun PersonalAccountScreen(navController: NavController, userViewModel: UserViewM
             Button(
                 onClick = {
                     if (user != null){
-                        userViewModel.deleteUser(user.id)
-                        userViewModel.signOut()
+                        userViewModel.deleteUserAccount(user.id)
+//                        userViewModel.signOut()
                     }
                 },
                 modifier = Modifier.fillMaxWidth()

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.littlelemon.petproject.MainApplication
 import com.littlelemon.petproject.db.UserDao
 import com.littlelemon.petproject.entities.UserEntity
@@ -22,12 +23,6 @@ class UserViewModel : ViewModel() {
     val userDao = MainApplication.userDatabase.getUserDao()
 
     val userList : LiveData<List<UserEntity>> = userDao.getUser()
-
-    fun deleteUser(id : Int){
-        viewModelScope.launch(Dispatchers.IO) {
-            userDao.deleteUser(id)
-        }
-    }
 
     fun addUser(
         firebaseUserId: String,
@@ -50,24 +45,36 @@ class UserViewModel : ViewModel() {
         }
     }
 
-    fun deleteUserAccount(userId: Int) {
+    fun deleteUserAccount(Id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            // Delete user from local database
-            userDao.deleteUser(userId)
-
-            // Firebase user deletion
             val firebaseUser = FirebaseAuth.getInstance().currentUser
-            firebaseUser?.delete()?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    _authState.postValue(AuthState.Unauthenticated)
-                } else {
-                    // Handle Firebase deletion error
-                    // You can log the error or notify the user
-                    _authState.postValue(AuthState.Error(task.exception?.message ?: "Failed to delete account"))
+
+            firebaseUser?.let { user ->
+                // Delete the Firebase Authentication account
+                user.delete().addOnCompleteListener { authTask ->
+                    if (authTask.isSuccessful) {
+                        // After Firebase deletion is successful, delete user from Room database
+                        viewModelScope.launch(Dispatchers.IO) {
+                            userDao.deleteUser(Id)
+                            _authState.postValue(AuthState.Unauthenticated)
+                        }
+                    } else {
+                        // Handle Firebase Auth deletion error
+                        _authState.postValue(
+                            AuthState.Error(
+                                authTask.exception?.message ?: "Failed to delete account"
+                            )
+                        )
+                    }
                 }
+            } ?: run {
+                _authState.postValue(AuthState.Error("No authenticated user found"))
             }
         }
     }
+
+
+
     //
     private val auth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
@@ -97,7 +104,9 @@ class UserViewModel : ViewModel() {
                 if (task.isSuccessful) {
                     _authState.value = AuthState.Authenticated
                 } else {
-                    _authState.value = AuthState.Error(task.exception?.message ?: "Something went wrong")
+                    _authState.value = AuthState.Error(
+                        task.exception?.message ?: "Something went wrong"
+                    )
                 }
             }
     }
@@ -121,9 +130,13 @@ class UserViewModel : ViewModel() {
                     val firebaseUser = auth.currentUser
                     val firebaseUserId = firebaseUser?.uid ?: ""
                     _authState.value = AuthState.Authenticated
-                    addUser(firebaseUserId,email, name, weight, height, sex)  // Add user to the database
+                    addUser(
+                        firebaseUserId,email, name, weight, height, sex
+                    )  // Add user to the database
                 } else {
-                    _authState.value = AuthState.Error(task.exception?.message ?: "Something went wrong")
+                    _authState.value = AuthState.Error(
+                        task.exception?.message ?: "Something went wrong"
+                    )
                 }
             }
     }

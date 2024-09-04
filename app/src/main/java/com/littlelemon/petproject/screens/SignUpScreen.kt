@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
@@ -33,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -128,6 +130,7 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
                 onValueChange = { weight = it.toFloatOrNull() ?: 0f },
                 modifier = Modifier
                     .fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
 
 //            Height field
@@ -142,6 +145,7 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
                 onValueChange = { height = it.toFloatOrNull() ?: 0f },
                 modifier = Modifier
                     .fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
 
 //            Email field
@@ -158,6 +162,7 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
                     .fillMaxWidth(),
                 placeholder = { Text(text = "example@email.com", fontSize = 15.sp)}
             )
+
 //            Sex field
             Spacer(modifier = Modifier.height(20.dp))
             Text(
