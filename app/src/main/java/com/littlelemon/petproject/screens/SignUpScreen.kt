@@ -32,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -39,6 +40,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.littlelemon.petproject.viewModels.AuthState
@@ -69,6 +71,7 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
     var sex = remember {
         mutableStateOf("")
     }
+
     val authState = userViewModel.authState.observeAsState()
     val context = LocalContext.current
 
@@ -115,7 +118,12 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
                 onValueChange = { name = it },
                 modifier = Modifier
                     .fillMaxWidth(),
-                placeholder = { Text(text = "John Doe", fontSize = 15.sp)}
+                placeholder = {
+                    Text(text = "John Doe",
+                        fontSize = 15.sp,
+                        color = Color.DarkGray
+                    )
+                }
             )
 
 //            Weight field
@@ -126,11 +134,17 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
                     .align(Alignment.Start)
             )
             Spacer(modifier = Modifier.height(10.dp))
-            TextField(value = weight.toString(),
+            TextField(value = if (weight == 0f) "" else weight.toString(),
                 onValueChange = { weight = it.toFloatOrNull() ?: 0f },
                 modifier = Modifier
                     .fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                placeholder = {
+                    Text("e.g. 70",
+                        fontSize = 15.sp,
+                        color = Color.DarkGray
+                    )
+                }
             )
 
 //            Height field
@@ -141,11 +155,17 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
                     .align(Alignment.Start)
             )
             Spacer(modifier = Modifier.height(10.dp))
-            TextField(value = height.toString(),
+            TextField(value = if (height == 0f) "" else height.toString(),
                 onValueChange = { height = it.toFloatOrNull() ?: 0f },
                 modifier = Modifier
                     .fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                placeholder = {
+                    Text("e.g. 170",
+                        fontSize = 15.sp,
+                        color = Color.DarkGray
+                    )
+                }
             )
 
 //            Email field
@@ -160,7 +180,12 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
                 onValueChange = { email = it },
                 modifier = Modifier
                     .fillMaxWidth(),
-                placeholder = { Text(text = "example@email.com", fontSize = 15.sp)}
+                placeholder = {
+                    Text( text = "example@email.com",
+                        fontSize = 15.sp,
+                        color = Color.DarkGray
+                    )
+                }
             )
 
 //            Sex field
@@ -228,6 +253,7 @@ fun SignUpScreen(navController: NavController, userViewModel: UserViewModel){
 
             Spacer(modifier = Modifier.height(10.dp))
             Button(onClick = {
+
                 userViewModel.signUp(email, password, name, weight, height, sex.value)
             },
                 modifier = Modifier
